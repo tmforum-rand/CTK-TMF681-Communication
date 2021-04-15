@@ -1,0 +1,21 @@
+{
+    "url": " http://localhost:8681/tmf-api/communicationManagement/v4/",
+    "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    },
+    "payloads": {
+        "CommunicationMessage": {
+            "POST": {
+                "payload": {
+                    "content": "Dear $Parameter1. Here is the information of the promotion $Parameter2",
+                    "messageType": "SMS",
+                    "receiver": [
+                        {}
+                    ],
+                    "sender": {}
+                }
+            }
+        }
+    }
+}

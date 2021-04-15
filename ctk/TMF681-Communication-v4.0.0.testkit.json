@@ -1,0 +1,1074 @@
+{
+    "info": {
+        "_postman_id": "ec552633-83db-4591-9ac4-75e27e6ae8a3",
+        "name": "CTK-Communication-4.0.0",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "N1",
+            "item": [
+                {
+                    "name": "/communicationMessage",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "af725632-10ab-4f1a-9749-f20d7f539fed",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "",
+                                    "if (Array.isArray(jsonData)) { ",
+                                    "  ",
+                                    "    pm.test('Array not expected as response', function (){pm.expect.fail()});",
+                                    "  ",
+                                    "",
+                                    "}",
+                                    "",
+                                    "pm.test(\"Status code is 201\", function () {",
+                                    "  pm.response.to.have.status(201);",
+                                    "});",
+                                    "",
+                                    "var instance = pm.response.json();",
+                                    "var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "",
+                                    "pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "",
+                                    "",
+                                    "",
+                                    "pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "",
+                                    "pm.globals.set('CONTENTCM01', instance['content']);",
+                                    "pm.globals.set('HREFCM01', instance['href']);",
+                                    "pm.globals.set('IDCM01', instance['id']);",
+                                    "pm.globals.set('MESSAGETYPECM01', instance['messageType']);",
+                                    "",
+                                    "pm.test('Body includes value held on content', function () {",
+                                    "  pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "});",
+                                    "pm.test('Body includes value held on href', function () {",
+                                    "  pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "});",
+                                    "pm.test('Body includes value held on id', function () {",
+                                    "  pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "});",
+                                    "pm.test('Body includes value held on messageType', function () {",
+                                    "  pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "});",
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"content\": \"Dear $Parameter1. Here is the information of the promotion $Parameter2\",\n  \"messageType\": \"SMS\",\n  \"receiver\": [\n    {}\n  ],\n  \"sender\": {}\n}"
+                        },
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ]
+                        },
+                        "description": "This operation creates a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "172b5123-1758-4e5d-9b2c-587a1c06f863",
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "  ",
+                                    "  ",
+                                    "  ",
+                                    "var jsonData = pm.response.json();",
+                                    "  ",
+                                    "if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+                                    "    jsonData.forEach(function (instance, index) {",
+                                    "      ",
+                                    "        var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM02\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM02');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM02\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM02');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM02\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM02');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM02\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM02');});",
+                                    "        }  ",
+                                    "    });",
+                                    "  }",
+                                    "  else {",
+                                    "    var instance = pm.response.json();",
+                                    "    var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM02\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM02');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM02\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM02');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM02\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM02');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM02\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM02');});",
+                                    "        }",
+                                    "   ",
+                                    "  }",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ]
+                        },
+                        "description": "This operation search for the created CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage/{{IDCM01}}",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "e9adaad1-6647-40cf-b894-b9cba4bdc834",
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "  ",
+                                    "  ",
+                                    "  ",
+                                    "var jsonData = pm.response.json();",
+                                    "  ",
+                                    "if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+                                    "    jsonData.forEach(function (instance, index) {",
+                                    "      ",
+                                    "        var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "          ",
+                                    "    });",
+                                    "  }",
+                                    "  else {",
+                                    "    var instance = pm.response.json();",
+                                    "    var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "",
+                                    "        ",
+                                    "   ",
+                                    "}",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage/{{IDCM01}}",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "path": [
+                                "{{IDCM01}}"
+                            ]
+                        },
+                        "description": "This operation search for one of the created CommunicationMessage"
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "N2",
+            "item": [
+                {
+                    "name": "/communicationMessage?fields=content",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "6416a623-3204-472f-8885-81b448fdd41b",
+                                "exec": [
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?fields=content",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "content"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage?content='{{CONTENTCM01}}'",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "3332563f-d725-4ef6-8a0f-5548d7d0371e",
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "  ",
+                                    "  ",
+                                    "  ",
+                                    "var jsonData = pm.response.json();",
+                                    "  ",
+                                    "if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+                                    "    jsonData.forEach(function (instance, index) {",
+                                    "      ",
+                                    "        var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "          ",
+                                    "    });",
+                                    "  }",
+                                    "  else {",
+                                    "    var instance = pm.response.json();",
+                                    "    var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "",
+                                    "        ",
+                                    "   ",
+                                    "}",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?content={{CONTENTCM01}}",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "content",
+                                    "value": "{{CONTENTCM01}}"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage?fields=href",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "e3e95f78-73c9-4bbe-8b32-f010b56bdf3f",
+                                "exec": [
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?fields=href",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "href"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage?fields=id",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "8b8d74bb-184c-4885-9b9b-1abcefc474a1",
+                                "exec": [
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?fields=id",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "id"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage?id={{IDCM01}}",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "3a2a1e98-86ad-49d2-bbf8-4878f3d2ce10",
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "  ",
+                                    "  ",
+                                    "  ",
+                                    "var jsonData = pm.response.json();",
+                                    "  ",
+                                    "if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+                                    "    jsonData.forEach(function (instance, index) {",
+                                    "      ",
+                                    "        var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "          ",
+                                    "    });",
+                                    "  }",
+                                    "  else {",
+                                    "    var instance = pm.response.json();",
+                                    "    var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "",
+                                    "        ",
+                                    "   ",
+                                    "}",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?id={{IDCM01}}",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "id",
+                                    "value": "{{IDCM01}}"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage?fields=messageType",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "41d60a06-6ad2-4cb5-b7dd-b0afd6a70f2b",
+                                "exec": [
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?fields=messageType",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "messageType"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage?messageType={{MESSAGETYPECM01}}",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "aa7a15da-3fe5-4286-b165-aaa0bda36361",
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "  ",
+                                    "  ",
+                                    "  ",
+                                    "var jsonData = pm.response.json();",
+                                    "  ",
+                                    "if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+                                    "    jsonData.forEach(function (instance, index) {",
+                                    "      ",
+                                    "        var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "          ",
+                                    "    });",
+                                    "  }",
+                                    "  else {",
+                                    "    var instance = pm.response.json();",
+                                    "    var requiredAttributes = ['content', 'href', 'id', 'messageType', 'receiver', 'sender'];",
+                                    "      ",
+                                    "        pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+                                    "      ",
+                                    "      ",
+                                    "      ",
+                                    "        pm.test('Response has content attribute', function() { pm.expect(instance[\"content\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has href attribute', function() { pm.expect(instance[\"href\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has id attribute', function() { pm.expect(instance[\"id\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has messageType attribute', function() { pm.expect(instance[\"messageType\"]).to.be.a('string'); });",
+                                    "        pm.test('Response has receiver attribute', function() { pm.expect(instance[\"receiver\"]).to.be.a('array'); });",
+                                    "      ",
+                                    "        pm.test('Body includes value held on content', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['content']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on href', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['href']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on id', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['id']);",
+                                    "        });",
+                                    "        pm.test('Body includes value held on messageType', function () {",
+                                    "            pm.expect(pm.response.text()).to.include(instance['messageType']);",
+                                    "        });",
+                                    "        // Individualized tests",
+                                    "        if (instance.id == pm.globals.get(\"IDCM01\")) {",
+                                    "            pm.test('content is ' + pm.globals.get(\"CONTENTCM01\"), function() {pm.expect(instance['content']) == pm.globals.get('CONTENTCM01');});",
+                                    "            pm.test('href is ' + pm.globals.get(\"HREFCM01\"), function() {pm.expect(instance['href']) == pm.globals.get('HREFCM01');});",
+                                    "            pm.test('id is ' + pm.globals.get(\"IDCM01\"), function() {pm.expect(instance['id']) == pm.globals.get('IDCM01');});",
+                                    "            pm.test('messageType is ' + pm.globals.get(\"MESSAGETYPECM01\"), function() {pm.expect(instance['messageType']) == pm.globals.get('MESSAGETYPECM01');});",
+                                    "        }",
+                                    "        if (instance.id == pm.globals.get(\"IDCM02\")) {",
+                                    "            pm.test('IDCM02 not expected on this test', function () {",
+                                    "                console.log(\"Non expected resource, may happen if there is a collision on attributes\")",
+                                    "            });",
+                                    "        }",
+                                    "",
+                                    "        ",
+                                    "   ",
+                                    "}",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage?messageType={{MESSAGETYPECM01}}",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "messageType",
+                                    "value": "{{MESSAGETYPECM01}}"
+                                }
+                            ]
+                        },
+                        "description": "This operation filter a CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage/{{IDCM01}}",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "e9b851cd-fdf1-479f-a8cd-ea07d31c23f1",
+                                "exec": [
+                                    "pm.test(\"Status code is 204\", function () {",
+                                    "    pm.response.to.have.status(204);",
+                                    "});",
+                                    "  ",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage/{{IDCM01}}",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "path": [
+                                "{{IDCM01}}"
+                            ]
+                        },
+                        "description": "This operation search for one of the created CommunicationMessage"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "/communicationMessage/{{IDCM01}}404",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "ac2a98e4-1aeb-447e-a9b9-7dc50ed6a17f",
+                                "exec": [
+                                    "pm.test(\"Status code is 404\", function () {",
+                                    "    pm.response.to.have.status(404);",
+                                    "});",
+                                    "  ",
+                                    "  "
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage/{{IDCM01}}",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "path": [
+                                "{{IDCM01}}"
+                            ]
+                        },
+                        "description": "This operation search for one of the created CommunicationMessage"
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "E1",
+            "item": [
+                {
+                    "name": "/communicationMessage/404ID",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "a7432bba-cca2-4be0-abd8-a83c28849777",
+                                "exec": [
+                                    "pm.test(\"Status code is 404\", function () {",
+                                    "    pm.response.to.have.status(404);",
+                                    "});",
+                                    "",
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{Communication}}communicationMessage/8ce13dbe-ab17-45a3-bef7-f4207fd827fd",
+                            "host": [
+                                "{{Communication}}communicationMessage"
+                            ],
+                            "path": [
+                                "8ce13dbe-ab17-45a3-bef7-f4207fd827fd"
+                            ]
+                        },
+                        "description": "This operation search for one of the created CommunicationMessage"
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        }
+    ],
+    "protocolProfileBehavior": {}
+}
